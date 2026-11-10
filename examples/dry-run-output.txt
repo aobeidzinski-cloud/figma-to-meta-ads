@@ -1,0 +1,41 @@
+# Sample run for an invented brand (Northwind Coffee Roasters). Ids are placeholders.
+
+$ python3 scripts/run.py --env-file config.env ingest
+  exported 4/20 frames
+  exported 8/20 frames
+  exported 12/20 frames
+  exported 16/20 frames
+  exported 20/20 frames
+Ingested 6 complete set(s): ColdBrewLaunch, Growler_Gift, OfficeBox, RoasterTour, SubscriptionSave, WholesaleBeans
+  SKIP: HolidayBlend: missing ratio(s) ['16:9'], skipped
+  SKIP: TastingFlight: duplicate frames for ['4:5'], skipped
+
+$ python3 scripts/run.py --env-file config.env build --dry-run
+  SKIP: HolidayBlend: missing ratio(s) ['16:9'], skipped
+  SKIP: TastingFlight: duplicate frames for ['4:5'], skipped
+~ DRY-RUN NW_ColdBrewLaunch: 4 placement rules, 5 bodies, 5 titles, 1 description, status PAUSED
+~ DRY-RUN NW_Growler_Gift: 4 placement rules, 5 bodies, 5 titles, 1 description, status PAUSED
+~ DRY-RUN NW_OfficeBox: 4 placement rules, 5 bodies, 5 titles, 1 description, status PAUSED
+! NW_RoasterTour: no copy file at copy/RoasterTour.json, skipping
+~ DRY-RUN NW_SubscriptionSave: 4 placement rules, 5 bodies, 5 titles, 1 description, status PAUSED
+~ DRY-RUN NW_WholesaleBeans: 4 placement rules, 5 bodies, 5 titles, 1 description, status PAUSED
+Would build 5 ad(s).
+
+$ python3 scripts/run.py --env-file config.env build --sets ColdBrewLaunch,OfficeBox
+  SKIP: HolidayBlend: missing ratio(s) ['16:9'], skipped
+  SKIP: TastingFlight: duplicate frames for ['4:5'], skipped
+Ad set has 47/50 non-archived ads, 3 free slot(s)
+  cropped 2160x3240 -> 2160x2700 (true 0.80)
+  downscaled to 1536x1920
+  downscaled to 1080x1920
++ NW_ColdBrewLaunch: creative <creative_id> -> ad <ad_id> (PAUSED)
+  downscaled to 1536x1920
+  downscaled to 1080x1920
++ NW_OfficeBox: creative <creative_id> -> ad <ad_id> (PAUSED)
+Built 2 ad(s).
+
+$ python3 scripts/run.py --env-file config.env build --sets ColdBrewLaunch,OfficeBox
+...
+= NW_ColdBrewLaunch: already in ad set, skipping
+= NW_OfficeBox: already in ad set, skipping
+Built 0 ad(s).
